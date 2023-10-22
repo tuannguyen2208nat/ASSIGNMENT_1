@@ -311,6 +311,7 @@ class imp_res : public Restaurant
             return;
             }
         }
+
         void xoadau()
         {
             if(head->next!=nullptr)
