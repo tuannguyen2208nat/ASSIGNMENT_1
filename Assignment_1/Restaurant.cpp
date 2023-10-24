@@ -1,4 +1,5 @@
 #include "main.h"
+
 extern int MAXSIZE;
 
 class Node
