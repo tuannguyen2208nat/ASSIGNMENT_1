@@ -745,7 +745,7 @@ class imp_res : public Restaurant
               {
               if(kiemtratrungtenkhachcho(name))
               {
-                  if(soluongkhachcho()<=MAXSIZE)
+                  if(soluongkhachcho()<MAXSIZE)
                   {
                       themvaohangcho(cus);
                   }
