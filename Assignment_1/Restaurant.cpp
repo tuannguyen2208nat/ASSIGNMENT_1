@@ -615,7 +615,6 @@ class imp_res : public Restaurant
              }
         }
 
-
         void xoathutucodieukien(string NAME)
         {
             customer*temp=thutucuoi;
