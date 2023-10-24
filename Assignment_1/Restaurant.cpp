@@ -559,6 +559,63 @@ class imp_res : public Restaurant
              }
         }
 
+        void xoakhachdoi(string NAME)
+        {
+    if(hangchodau==nullptr){return;}
+            customer*temp=hangchocuoi;
+            while(temp!=nullptr)
+            {
+                if(temp->name==NAME){break;}
+                temp=temp->prev;
+            }
+            if(temp!=nullptr)
+             {
+                 if(temp==hangchocuoi)
+                {
+                    if(hangchocuoi!=hangchodau)
+                  {
+                     customer *p = hangchocuoi->prev;
+                     p->next = nullptr;
+                     hangchocuoi = p;
+                     delete(temp);
+                     return ;
+                  }
+                  else
+                  {
+                       hangchodau=nullptr;
+                       hangchocuoi=hangchodau;
+                       return ;
+                  }
+                }
+                else if(temp==hangchodau)
+                {
+                    if(temp->next!=nullptr)
+                   {
+                   customer*p=hangchodau->next;
+                   p->prev=nullptr;
+                   hangchodau=p;
+                   delete(temp);
+                   }
+                   else
+                   {
+                       hangchodau=nullptr;
+                       hangchocuoi=hangchodau;
+                       return ;
+                   }
+                }
+                else
+                {
+                  customer*TEMP=temp->prev;
+                  customer*p=temp->next;
+                  p->prev=TEMP;
+                  TEMP->next=p;
+                  temp=nullptr;
+                  delete(temp);
+                }
+             }
+        }
+
+
         void xoathutucodieukien(string NAME)
         {
             customer*temp=thutucuoi;
@@ -764,15 +821,16 @@ class imp_res : public Restaurant
 		    if(head==nullptr){return;}
 		    if(num>=MAXSIZE||num>=soluongkhachtrongban())
                 {
+                    int a=soluongkhachcho();
                     xoahetkhach();
                     vitri=nullptr;
                     if(hangchodau!=nullptr)
                     { customer*temp=hangchodau;
-                    for(int i=0;i<MAXSIZE;i++)
+                    for(int i=0;i<a;i++)
                     {
                     if(hangchodau==nullptr){break;}
                     RED(temp->name,temp->energy);
-                    xoakhachcho(temp->name);
+                    xoakhachdoi(temp->name);
                     temp=hangchodau;
                     }
                     }
