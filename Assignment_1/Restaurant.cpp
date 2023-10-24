@@ -19,7 +19,7 @@ public:
     LinkedList() : head(nullptr), size(0) {}
 
     void push_back(int value)
-{
+    {
     Node* newNode = new Node(value);
     if (!head)
     {
@@ -35,8 +35,9 @@ public:
     }
     size++;
 }
+
     int get(int index)
-     {
+    {
         if (index < 0 || index >= size)
         {
 
@@ -49,8 +50,9 @@ public:
         }
         return current->data;
      }
+
     void set(int index, int value)
-     {
+    {
         if (index < 0 || index >= size) {
 
             return;
@@ -66,6 +68,26 @@ public:
     {
         return size;
     }
+
+    int shellSort()
+    {
+        int hoandoi = 0;
+        int n = size;
+        for (int gap = n / 2; gap > 0; gap /= 2) {
+            for (int i = gap; i < n; i++) {
+                int val = get(i);
+                int j;
+                for (j = i; j >= gap && get(j - gap) > val; j -= gap) {
+                    int VAL = get(j - gap);
+                    set(j, VAL);
+                    hoandoi++;
+                }
+                set(j, val);
+            }
+        }
+        return hoandoi;
+    }
+
     void clear()
     {
         Node* current = head;
@@ -829,30 +851,14 @@ class imp_res : public Restaurant
             }
             temp=hangchodau;
             LinkedList arr;
-            int n=0;
-            int hoandoi=0;
             while(temp!=chocheck)
             {
                 arr.push_back(temp->energy);
                 temp=temp->next;
-                n++;
             }
-            int internal,i,j;
-            for(internal=n/2;internal>=1;internal/=2)
-             {for(i=internal;i<n;i++)
-                {
-                  int val=arr.get(i);
-                   for(j=i;(j>=internal)&&(arr.get(j-internal)>val);j-=internal)
-                     {
-                       int VAL=arr.get(j-internal);
-                       arr.set(j,VAL);
-                       hoandoi++;
-                     }
-                  arr.set(j,val);
-                }
-             }
-             BLUE(hoandoi);
-             arr.clear();
+            int hoandoi=arr.shellSort();
+            BLUE(hoandoi);
+            arr.clear();
 		}
 
 		void REVERSAL()
