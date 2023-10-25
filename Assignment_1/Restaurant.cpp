@@ -965,7 +965,8 @@ class imp_res : public Restaurant
               }
             }
             int hoandoi=arr.shellSort();
-            BLUE(hoandoi);
+            int solanlap=hoandoi%MAXSIZE;
+            BLUE(solanlap);
             arr.clear();
 		}
 
