@@ -942,11 +942,24 @@ class imp_res : public Restaurant
             temp=hangchodau;
             LinkedList arr;
             int position=0;
-            while(temp!=chocheck)
+            if(chocheck==hangchocuoi)
             {
+                 while(temp!=chocheck)
+              {
                 arr.push_back(temp->energy,position);
                 position++;
                 temp=temp->next;
+              }
+             arr.push_back(temp->energy,position);
+            }
+            else
+            {
+                 while(temp!=(chocheck->next))
+              {
+                arr.push_back(temp->energy,position);
+                position++;
+                temp=temp->next;
+              }
             }
             int hoandoi=arr.shellSort();
             BLUE(hoandoi);
