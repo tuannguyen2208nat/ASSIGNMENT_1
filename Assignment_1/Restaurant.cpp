@@ -278,7 +278,7 @@ class imp_res : public Restaurant
                 if(temp->name==NAME){break;}
                 temp=temp->next;
             }
-            if(tail==head){vitri=nullptr;head=nullptr;tail=head;delete(temp);return;}
+            if((temp==head)&&(tail==head)){vitri=nullptr;head=nullptr;tail=head;delete(temp);return;}
 
             if(temp==tail)
                 {
@@ -290,7 +290,7 @@ class imp_res : public Restaurant
                      tail = p;
                      delete(temp);
                 }
-                else if(temp==head)
+            else if(temp==head)
                 {
                    if(temp->energy>0)
                       {vitri=head->next;}
@@ -300,7 +300,7 @@ class imp_res : public Restaurant
                    head=p;
                    delete(temp);
                 }
-                else
+            else
                 {
                 if(temp->energy>0)
                     {vitri=temp->next;}
