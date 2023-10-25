@@ -278,10 +278,11 @@ class imp_res : public Restaurant
                 if(temp->name==NAME){break;}
                 temp=temp->next;
             }
+            if(tail==head){vitri=nullptr;head=nullptr;tail=head;delete(temp);return;}
 
             if(temp==tail)
                 {
-                     if(temp->energy>0)
+                    if(temp->energy>0)
                       {vitri=head;}
                      else {vitri=temp->prev;}
                      customer *p = tail->prev;
@@ -291,9 +292,9 @@ class imp_res : public Restaurant
                 }
                 else if(temp==head)
                 {
-                    if(temp->energy>0)
+                   if(temp->energy>0)
                       {vitri=head->next;}
-                     else {vitri=tail;}
+                   else {vitri=tail;}
                    customer*p=head->next;
                    p->prev=nullptr;
                    head=p;
@@ -344,7 +345,6 @@ class imp_res : public Restaurant
             customer*temp=head;
             p->prev=nullptr;
             head=p;
-            vitri=nullptr;
             delete(temp);
             return;
             }
@@ -365,6 +365,7 @@ class imp_res : public Restaurant
             {
                 xoadau();
             }
+            vitri=nullptr;
         }
 
         void timdayconver1()
