@@ -915,6 +915,7 @@ class imp_res : public Restaurant
 			if(num==0){BLUE (0); return ;}
 			customer*temp=hangchodau;
 			customer*chocheck=hangchodau;
+			customer*duphong=nullptr;
 			int val=temp->energy;
 			int VAL=abs(val);
 			while(temp!=nullptr)
@@ -926,6 +927,7 @@ class imp_res : public Restaurant
                        val=temp->energy;
 			           VAL=abs(temp->energy);
 			           chocheck=temp;
+			           if(temp->next!=nullptr){duphong=temp->next;}
                     }
                     else
                     {
@@ -934,6 +936,7 @@ class imp_res : public Restaurant
                         val=temp->energy;
 			            VAL=abs(temp->energy);
                         chocheck=temp;
+                        if(temp->next!=nullptr){duphong=temp->next;}
                         }
                     }
                 }
@@ -954,7 +957,7 @@ class imp_res : public Restaurant
             }
             else
             {
-                 while(temp!=(chocheck->next))
+                 while(temp!=(duphong))
               {
                 arr.push_back(temp->energy,position);
                 position++;
