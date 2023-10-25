@@ -6,8 +6,9 @@ class Node
 {
 public:
     int data;
+    int vitritronglink;
     Node* next;
-    Node(int value) : data(value), next(nullptr) {}
+    Node(int value,int vitri) : data(value), vitritronglink(vitri),next(nullptr) {}
 };
 
 class LinkedList
@@ -19,9 +20,9 @@ private:
 public:
     LinkedList() : head(nullptr), size(0) {}
 
-    void push_back(int value)
-    {
-    Node* newNode = new Node(value);
+    void push_back(int value,int vitri)
+{
+    Node* newNode = new Node(value,vitri);
     if (!head)
     {
         head = newNode;
@@ -52,6 +53,21 @@ public:
         return current->data;
      }
 
+     int getvitri(int index)
+     {
+         if (index < 0 || index >= size)
+        {
+
+            return -1;
+        }
+        Node* current = head;
+        for (int i = 0; i < index; i++)
+        {
+            current = current->next;
+        }
+        return current->vitritronglink;
+     }
+
     void set(int index, int value)
     {
         if (index < 0 || index >= size) {
@@ -74,14 +90,29 @@ public:
     {
         int hoandoi = 0;
         int n = size;
-        for (int gap = n / 2; gap > 0; gap /= 2) {
-            for (int i = gap; i < n; i++) {
+        for (int gap = n / 2; gap > 0; gap /= 2)
+        {
+            for (int i = gap; i < n; i++)
+            {
                 int val = get(i);
                 int j;
-                for (j = i; j >= gap && get(j - gap) > val; j -= gap) {
+                for (j = i; j >= gap && get(j - gap) >= val; j -= gap)
+                {
+                    if(get(j - gap)>val)
+                    {
                     int VAL = get(j - gap);
                     set(j, VAL);
                     hoandoi++;
+                    }
+                    else if(get(j - gap)==val)
+                    {
+                        if(getvitri(j-gap)<getvitri(i))
+                        {
+                         int VAL = get(j - gap);
+                         set(j, VAL);
+                         hoandoi++;
+                        }
+                    }
                 }
                 set(j, val);
             }
@@ -910,9 +941,11 @@ class imp_res : public Restaurant
             }
             temp=hangchodau;
             LinkedList arr;
+            int position=0;
             while(temp!=chocheck)
             {
-                arr.push_back(temp->energy);
+                arr.push_back(temp->energy,position);
+                position++;
                 temp=temp->next;
             }
             int hoandoi=arr.shellSort();
